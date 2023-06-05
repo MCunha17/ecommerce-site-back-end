@@ -7,7 +7,7 @@ The displayed license badge is sourced from <a href="https://shields.io/category
 ## Description
 This project provides a back-end solution for an e-commerce website using the latest technologies. It allows a manager at an internet retail company to have a functional Express.js API to compete with other e-commerce companies.
 
-This solution was created using [starter code](https://github.com/coding-boot-camp/fantastic-umbrella) from [Xander Rapstine](https://github.com/Xandromus), which contained contributions from href="https://github.com/Georgeyoo">Georgeyoo</a> and <a href="https://docs.github.com/en/code-security/dependabot/dependabot-security-updates/configuring-dependabot-security-updates">dependabot</a>.
+This solution was created using [starter code](https://github.com/coding-boot-camp/fantastic-umbrella) from [Xander Rapstine](https://github.com/Xandromus), which contained contributions from <a href="https://github.com/Georgeyoo">Georgeyoo</a> and <a href="https://docs.github.com/en/code-security/dependabot/dependabot-security-updates/configuring-dependabot-security-updates">dependabot</a>.
 
 You can view a video demonstrating the code's functionality [here](https://drive.google.com/file/d/1sWL6UEiGLZhQTYTLvgbS63ME-vbP2DqE/view?usp=sharing) and the GitHub repository [here](https://github.com/MCunha17/ecommerce-site-back-end).
 

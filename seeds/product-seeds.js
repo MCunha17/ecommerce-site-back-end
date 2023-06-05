@@ -1,5 +1,7 @@
+// import Product model
 const { Product } = require('../models');
 
+// product data
 const productData = [
   {
     product_name: 'Plain T-Shirt',
@@ -33,6 +35,7 @@ const productData = [
   },
 ];
 
+// function to insert product data into the database
 const seedProducts = () => Product.bulkCreate(productData);
 
 module.exports = seedProducts;

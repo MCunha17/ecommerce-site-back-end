@@ -1,14 +1,13 @@
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
-// The `/api/products` endpoint
+// the '/api/products' endpoint
 
-// get all products
+// find all products
 router.get('/', async (req, res) => {
   try {
-  // find all products
-  // be sure to include its associated Category and Tag data
     const products = await Product.findAll({
+      // be sure to include its associated Category and Tag data
       include: [{ model: Category }, { model: Tag, through: ProductTag }],
     });
     res.status(200).json(products);
@@ -17,16 +16,15 @@ router.get('/', async (req, res) => {
   }
 });
 
-// get one product
+// find a single product by its `id`
 router.get('/:id', async (req, res) => {
   try {
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
     const product = await Product.findByPk(req.params.id, {
+      // be sure to include its associated Category and Tag data
       include: [{ model: Category }, { model: Tag, through: ProductTag }],
   });
   
-  // If product not found, return 404 status
+  // if product not found, return 404 status
   if (!product) {
     res.status(404).json({ message: 'Product not found' });
     return;
@@ -68,9 +66,8 @@ router.post('/', async (req, res) => {
   }
 });
 
-// update product
+// update product data
 router.put('/:id', async (req, res) => {
-  // update product data
   try {
     await Product.update(req.body, {
       where: {
@@ -106,6 +103,7 @@ router.put('/:id', async (req, res) => {
     ]);
   }
 
+    // once product has been updated, display confirmation message
     res.status(400).json({ message: 'Product updated.' });
   } catch (err) {
     console.log(err);
@@ -113,21 +111,22 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+// delete one product by its 'id' value
 router.delete('/:id', async (req, res) => {
   try {
-  // delete one product by its `id` value
     const product = await Product.destroy({
       where: {
         id: req.params.id,
       },
     });
 
-    // If product not found, return 404 status
+    // if product not found, return 404 status
     if (!product) {
       res.status(404).json({ message: 'Product not found' });
       return;
     }
 
+    // once product has been deleted, display confirmation message
     res.status(200).json({ message: 'Product deleted.' });
   } catch (err) {
     res.status(500).json(err);

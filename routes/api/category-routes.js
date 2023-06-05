@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const { Category, Product } = require('../../models');
 
-// The `/api/categories` endpoint
+// the '/api/categories' endpoint
 
+// find all categories
 router.get('/', async (req, res) => {
   try {
-    // find all categories
-    // be sure to include its associated Products
     const categories = await Category.findAll({
+    // includes its associated Products
     include: [Product],
     });
     res.status(200).json(categories);
@@ -16,29 +16,28 @@ router.get('/', async (req, res) => {
   }
 });
 
+// find one category by its 'id' value
 router.get('/:id', async (req, res) => {
   try {
-    // find one category by its `id` value
-    // be sure to include its associated Products
     const category = await Category.findByPk(req.params.id, {
-    include: [Product],
+      // include its associated Products
+      include: [Product],
   });
 
-  // If category not found, return 404 status
+  // if category not found, return 404 status
     if (!category) {
       res.status(404).json({ message: 'Category not found.' });
       return;
     }
-
     res.status(200).json(category);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+// create a new category
 router.post('/', async (req, res) => {
   try {
-  // create a new category
     const category = await Category.create(req.body);
     res.status(201).json(category);
   } catch (err) {
@@ -46,46 +45,48 @@ router.post('/', async (req, res) => {
   }
 });
 
+// update category by its 'id' value
 router.put('/:id', async (req, res) => {
   try {
-    // update a category by its `id` value
     const category = await Category.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
 
-    // If category not found, return 404 status
+    // if category not found, return 404 status
     if (!category[0]) {
       res.status(404).json({ message: 'Category not found.' });
       return;
     }
 
+    // once category has been updated, display confirmation message
     res.status(200).json({ message: 'Category updated.' });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+// delete category by its 'id' value
 router.delete('/:id', async (req, res) => {
   try {
-  // delete a category by its `id` value
     const category = await Category.destroy({
       where: {
         id: req.params.id,
       },
     });
 
-  // If category not found, return 404 status
+    // if category not found, return 404 status
     if (!category) {
       res.status(404).json({ message: 'Category not found.' });
       return;
     }
 
-  res.status(200).json({ message: 'Category deleted.' });
-} catch (err) {
-  res.status(500).json(err);
-}
+    // once category has been deleted, display confirmation message
+    res.status(200).json({ message: 'Category deleted.' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
